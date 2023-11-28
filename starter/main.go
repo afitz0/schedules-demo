@@ -8,8 +8,8 @@ import (
 
 	"go.uber.org/zap/zapcore"
 
-	"starter"
-	"starter/zapadapter"
+	"schedules"
+	"schedules/zapadapter"
 )
 
 func main() {
@@ -23,11 +23,11 @@ func main() {
 	defer c.Close()
 
 	workflowOptions := client.StartWorkflowOptions{
-		ID:        "temporal-starter-workflow",
-		TaskQueue: "temporal-starter",
+		ID:        "temporal-schedules-workflow",
+		TaskQueue: "temporal-schedules",
 	}
 
-	we, err := c.ExecuteWorkflow(context.Background(), workflowOptions, starter.Workflow, "Hello", "World")
+	we, err := c.ExecuteWorkflow(context.Background(), workflowOptions, schedules.RecommendationsWorkflow, schedules.Customer{})
 	if err != nil {
 		log.Fatalln("Unable to execute workflow", err)
 	}

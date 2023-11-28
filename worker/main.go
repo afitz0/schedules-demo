@@ -8,8 +8,8 @@ import (
 
 	"go.uber.org/zap/zapcore"
 
-	"starter"
-	"starter/zapadapter"
+	"schedules"
+	"schedules/zapadapter"
 )
 
 func main() {
@@ -24,8 +24,8 @@ func main() {
 
 	w := worker.New(c, "temporal-starter", worker.Options{})
 
-	a := &starter.Activities{}
-	w.RegisterWorkflow(starter.Workflow)
+	a := &schedules.Activities{}
+	w.RegisterWorkflow(schedules.RecommendationsWorkflow)
 	w.RegisterActivity(a)
 
 	err = w.Run(worker.InterruptCh())
