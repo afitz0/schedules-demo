@@ -5,6 +5,7 @@ import (
 	"log"
 	"time"
 
+	"go.temporal.io/api/enums/v1"
 	"go.temporal.io/sdk/client"
 	"go.temporal.io/sdk/temporal"
 
@@ -50,9 +51,11 @@ func CreateDailySchedule() {
 	scheduleID := "daily-recommendations"
 	sClient := c.ScheduleClient()
 	_, err = sClient.Create(ctx, client.ScheduleOptions{
-		ID:     scheduleID,
-		Spec:   spec,
-		Action: action,
+		ID:             scheduleID,
+		Spec:           spec,
+		Action:         action,
+		Overlap:        enums.SCHEDULE_OVERLAP_POLICY_BUFFER_ONE,
+		PauseOnFailure: true,
 	})
 
 	if err == temporal.ErrScheduleAlreadyRunning {

@@ -22,7 +22,7 @@ func main() {
 	}
 	defer c.Close()
 
-	w := worker.New(c, "temporal-starter", worker.Options{})
+	w := worker.New(c, "schedules-demo", worker.Options{})
 
 	a := &schedules.Activities{}
 	w.RegisterWorkflow(schedules.RecommendationsWorkflow)
