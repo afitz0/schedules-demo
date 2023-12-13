@@ -43,10 +43,12 @@ func CreateDailySchedule() {
 	}
 	defer c.Close()
 
-	// Swap out with the desired spec
+	spec := client.ScheduleSpec{}
+
+	// Pre-filled placeholders
 	//spec := MakeSpecDailyCron()
 	//spec := MakeSpecDailyCalendar()
-	spec := MakeSpecDailyInterval()
+	//spec := MakeSpecDailyInterval()
 
 	scheduleID := "daily-recommendations"
 	sClient := c.ScheduleClient()
@@ -80,8 +82,8 @@ func MakeSpecDailyCalendar() client.ScheduleSpec {
 	return client.ScheduleSpec{
 		Calendars: []client.ScheduleCalendarSpec{
 			{
-				Hour:      []client.ScheduleRange{{Start: 0, End: 0, Step: 1}}, // Default, but good to see anyways.
-				Minute:    []client.ScheduleRange{{Start: 0, End: 0, Step: 1}}, // Default, but good to see anyways.
+				Hour:      []client.ScheduleRange{{Start: 0, End: 0, Step: 1}}, // Default, but good to see
+				Minute:    []client.ScheduleRange{{Start: 0, End: 0, Step: 1}}, // Default, but good to see
 				DayOfWeek: []client.ScheduleRange{{Start: 1, End: 5}},          // Monday ~ Friday
 			},
 		},
